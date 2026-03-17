@@ -176,8 +176,49 @@
       KEYS.push('s'+i+'_'+f);
     });
   });
+
+  // Dados fictícios pré-preenchidos
+  var DEFAULTS = {
+    's1_nome':'Lucas Ferreira Souza','s1_idade':'19','s1_curso':'ADS — Análise e Desenvolvimento de Sistemas','s1_semestre':'2º semestre',
+    's1_desafios':'A maior dificuldade é conciliar o trabalho part-time com os estudos. Matemática Discreta e Lógica de Programação exigem muito. Às vezes sinto que o ritmo das aulas é rápido demais e não sobra tempo pra fixar o conteúdo direito.',
+    's1_motivacoes':'Sempre fui curioso com tecnologia desde pequeno, desmontava eletrônicos pra ver como funcionavam. Me motiva saber que posso criar soluções que ajudam pessoas de verdade. Também me inspiro em histórias de pessoas que começaram do zero e montaram suas próprias empresas de tecnologia.',
+    's1_expectativas':'Quero conseguir um estágio na área antes de terminar o curso e trabalhar com desenvolvimento de sistemas. Sonho em trabalhar numa empresa de produto, não de serviço, onde eu possa ver o impacto real do que construo.',
+    's1_sugestoes':'O curso poderia ter mais projetos práticos desde o início, menos teoria solta. Parcerias com empresas para estágio também seriam muito bem-vindas. Uma disciplina de Git e versionamento no primeiro semestre ajudaria muito.',
+
+    's2_nome':'Mariana Costa Lima','s2_idade':'18','s2_curso':'Ciência da Computação','s2_semestre':'1º semestre',
+    's2_desafios':'Entrei no curso sem saber programar nada. O choque do primeiro semestre foi grande: Cálculo, Lógica e Programação ao mesmo tempo. Sinto que os professores às vezes assumem que você já sabe o básico e pulam etapas.',
+    's2_motivacoes':'Minha prima é desenvolvedora e trabalha de casa ganhando muito bem. Isso me inspirou. Mas além disso, gosto da parte de resolver problemas — de pensar em como fazer algo funcionar do zero até funcionar de verdade.',
+    's2_expectativas':'Quero me especializar em inteligência artificial. Acho que essa área vai mudar tudo nos próximos anos e quero fazer parte dessa transformação. Tenho interesse em pesquisa também.',
+    's2_sugestoes':'Precisamos de mais monitoria e grupos de estudo organizados pela faculdade. Muita gente desiste no primeiro semestre por falta de suporte. Um programa de nivelamento para quem entra sem base seria essencial.',
+
+    's3_nome':'Pedro Henrique Alves','s3_idade':'20','s3_curso':'Redes de Computadores','s3_semestre':'3º semestre',
+    's3_desafios':'O mercado exige certificações como CCNA e CompTIA A+ mas a faculdade não prepara diretamente pra isso. Acabo estudando por fora, o que consome muito tempo e dinheiro. O laboratório de redes está desatualizado.',
+    's3_motivacoes':'Gosto de entender como a internet funciona de verdade, desde o cabo físico até o servidor. Tem um lado quase investigativo em redes que me prende. E o mercado paga muito bem pra quem domina segurança da informação.',
+    's3_expectativas':'Quero trabalhar como analista de redes ou segurança da informação. Segurança está em alta e as vagas pagam bem. Penso em fazer um CCNA assim que terminar o segundo ano do curso.',
+    's3_sugestoes':'O laboratório precisa de equipamentos mais modernos. Também precisamos ter simuladores como GNS3 instalados nos computadores da faculdade. Mais aulas práticas de configuração de roteadores e switches.',
+
+    's4_nome':'Bianca Rodrigues Nunes','s4_idade':'19','s4_curso':'Sistemas de Informação','s4_semestre':'2º semestre',
+    's4_desafios':'Sou mulher numa área onde a maioria é homem, o que às vezes gera situações desconfortáveis. Além disso, tenho dificuldade com as disciplinas de programação e sinto que precisaria de mais atenção individual dos professores.',
+    's4_motivacoes':'Quero provar que mulheres têm tudo para se destacar em TI. Me motiva muito ver referências como Grace Hopper e as primeiras programadoras da história. Quero fazer a diferença e ser referência para outras meninas.',
+    's4_expectativas':'Sonho em trabalhar com UX/UI design ou gestão de projetos de tecnologia. Me identifico com entender as necessidades das pessoas e transformar isso em soluções digitais que funcionam para quem vai usar.',
+    's4_sugestoes':'A faculdade poderia ter grupos de mulheres na tecnologia e palestras com profissionais representativas. Projetos de inclusão e diversidade em TI precisam sair do papel. Mais representatividade nos exemplos usados em sala.',
+
+    's5_nome':'Gabriel Oliveira Santos','s5_idade':'20','s5_curso':'Engenharia de Software','s5_semestre':'3º semestre',
+    's5_desafios':'A grade curricular tem muita teoria e pouca prática real. Aprendo mais em cursos online do que nas aulas do curso. Manter a disciplina pra estudar sozinho em casa também é difícil — a procrastinação é minha maior inimiga.',
+    's5_motivacoes':'Já tenho um projeto pessoal de app que estou desenvolvendo. Isso me mantém motivado porque é algo que eu mesmo quero ver funcionar e que resolvo um problema real que eu tive. Imagino lançar e ter usuários usando.',
+    's5_expectativas':'Quero lançar meu app ainda durante a faculdade ou logo depois. Se não der, quero trabalhar como desenvolvedor mobile — é o que mais me interessa. React Native e Flutter estão na minha lista de aprendizado.',
+    's5_sugestoes':'Deveria existir uma incubadora de startups dentro da faculdade para apoiar alunos que querem empreender. Acesso a mentores e infraestrutura faria muita diferença. Hackathons internos também seriam ótimos.'
+  };
+
   function sv(k,v){localStorage.setItem('dt_'+k,v);showToast('💾 Salvo automaticamente!')}
-  function loadAll(){KEYS.forEach(function(k){var el=document.getElementById(k);var v=localStorage.getItem('dt_'+k);if(el&&v)el.value=v})}
+  function loadAll(){
+    KEYS.forEach(function(k){
+      var el=document.getElementById(k);
+      if(!el)return;
+      var saved=localStorage.getItem('dt_'+k);
+      el.value = (saved !== null) ? saved : (DEFAULTS[k] || '');
+    });
+  }
   
   var _toastT;
   function showToast(msg){

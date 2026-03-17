@@ -192,14 +192,31 @@
     _toastT=setTimeout(function(){el.classList.remove('show')},2200);
   }
 
+  // Dados fictícios pré-preenchidos
+  var PROF_DEFAULTS = {
+    'p_nome': 'Ricardo Mendes Carvalho',
+    'p_cargo': 'Arquiteto de Software Sênior · DevCore Tecnologia',
+    'p_exp': '9 anos de experiência',
+    'p_form': 'Bacharel em Ciência da Computação + MBA em Gestão de TI',
+    'p_apresentacao': 'Ricardo tem 31 anos e é natural de Belo Horizonte. Formou-se em Ciência da Computação pela UFMG em 2016 e entrou direto no mercado como desenvolvedor júnior numa fintech. Hoje é Arquiteto de Software Sênior na DevCore Tecnologia, empresa de 200 funcionários focada em soluções financeiras para o agronegócio. Com 9 anos de experiência sólida passando por startups, consultorias e empresas de produto, lidera um time de 12 pessoas e é responsável por decisões de arquitetura que impactam milhões de transações por mês.',
+    'p_desafios': 'O maior desafio foi a transição de desenvolvedor para arquiteto. De repente você para de codar o dia inteiro e começa a tomar decisões que vão impactar o trabalho de 12 pessoas por anos — o peso é completamente diferente. Outro desafio constante é a dívida técnica: código legado que ninguém quer mexer mas que vai quebrando produção nos momentos menos esperados. Manter a equipe alinhada quando todos têm opiniões fortes sobre tecnologia consome mais energia do que parece. Por fim, acompanhar mudanças rápidas da área sem abandonar o que já funciona bem é um equilíbrio difícil de manter.',
+    'p_motivacoes': 'O que me mantém na área é ver sistemas que desenhei sendo usados de verdade. Quando um produtor rural no Mato Grosso usa nosso app pra fechar um contrato de R$ 2 milhões sem sair da fazenda, sinto que fiz algo que importa. Também me motiva muito mentorear os juniores do time: ver um estagiário crescer, ganhar confiança e se tornar sênior não tem preço. E simplesmente resolver problemas difíceis ainda me dá aquele prazer de quando comecei. Isso nunca passou.',
+    'p_dicas': '1. Aprenda inglês como se sua carreira dependesse disso — porque depende. Toda a documentação, fóruns e as melhores oportunidades estão em inglês.\n\n2. Faça projetos reais, não importa o tamanho. Um CRUD funcionando na nuvem vale mais no currículo do que dez cursos concluídos sem aplicação prática.\n\n3. Aprenda Git desde o primeiro dia. No mercado, trabalho em equipe sem versionamento é impensável.\n\n4. Não se apegue a uma linguagem — aprenda a aprender. Já programei em Java, PHP, Python, Go e TypeScript. O que muda é a sintaxe; o raciocínio é o mesmo.\n\n5. Desenvolva comunicação. O dev que explica o que está fazendo para um gestor sem formação técnica é infinitamente mais valioso do que um gênio que não consegue trabalhar em equipe.',
+    'p_trajetoria': '2015: Começou como estagiário numa startup de BH durante a faculdade. Era caos total, mas aprendeu rápido porque precisava sobreviver.\n\n2016: Formou-se e virou desenvolvedor júnior na mesma empresa.\n\n2018: Mudou para uma consultoria em São Paulo — choque cultural, mas crescimento acelerado.\n\n2020: Com a pandemia, migrou para trabalho 100% remoto em empresa de produto em SP.\n\n2022: Promovido a desenvolvedor sênior após liderar a migração de um sistema legado crítico sem parar a produção.\n\n2023: Assumiu o cargo de Arquiteto de Software na DevCore, o maior salto da carreira. Hoje trabalha de casa com autonomia e ainda tem tempo para se atualizar.',
+    'p_frase': 'Ninguém virou sênior assistindo aula. Você precisa botar a mão na massa, errar em produção pelo menos uma vez e sobreviver pra contar a história.',
+    'p_frase_autor': '— Ricardo Mendes Carvalho, Arquiteto de Software Sênior · DevCore Tecnologia',
+    'p_resumo': 'A entrevista com Ricardo Mendes Carvalho foi muito enriquecedora e me fez enxergar a carreira em TI de um ângulo mais realista. O que mais me marcou foi quando ele disse que a parte técnica, por mais importante que seja, não é suficiente sozinha. Comunicação, trabalho em equipe e autonomia para tomar decisões são as competências que fazem diferença real no mercado.\n\nPercebi que a trajetória dele não foi linear: mudanças de cidade, de empresa e de função foram aprendizados. Isso me dá mais tranquilidade, porque parece que precisamos saber tudo desde o início do curso — mas não é assim.\n\nO ponto mais prático foi a importância do inglês e do Git já no começo da carreira. São coisas que estão ao meu alcance agora, sem esperar o fim do curso.\n\nDo ponto de vista do Design Thinking, essa entrevista confirmou que o problema central dos estudantes de TI não é só aprender tecnologia, mas aprender a navegar num mercado em constante mudança. Saí mais motivado e com um caminho mais claro: focar em projetos reais, aprender Git e inglês em paralelo às aulas, e não ter medo de errar no processo.'
+  };
+
   // Auto-save
   var FIELDS=['p_nome','p_cargo','p_exp','p_form','p_apresentacao','p_desafios','p_motivacoes','p_dicas','p_trajetoria','p_frase','p_frase_autor','p_resumo'];
   function sv(k,v){localStorage.setItem('prof_'+k,v);showToast('💾 Salvo automaticamente!')}
   function loadAll(){
     FIELDS.forEach(function(k){
       var el=document.getElementById(k);
-      var v=localStorage.getItem('prof_'+k);
-      if(el&&v)el.value=v;
+      if(!el)return;
+      var saved=localStorage.getItem('prof_'+k);
+      el.value = (saved !== null) ? saved : (PROF_DEFAULTS[k] || '');
     });
   }
   loadAll();

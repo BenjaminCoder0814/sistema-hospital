@@ -179,12 +179,24 @@
 </main>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>
+  // Dados fictícios pré-preenchidos (baseado em Lucas Ferreira Souza)
+  var EM_DEFAULTS = {
+    'em_usuario': 'Lucas Ferreira Souza',
+    'em_pensa': 'Tem medo de não conseguir um estágio antes de se formar e ficar pra trás dos colegas. Sonha em trabalhar numa empresa de tecnologia onde possa crescer e aprender com profissionais mais experientes. Sente ansiedade quando vê o ritmo acelerado das aulas e percebe que ainda está acumulando dúvidas. No fundo acredita que tem capacidade, mas a insegurança bate quando compara seu progresso com o de colegas que já programam há mais tempo.',
+    'em_ve': 'Vê amigos e colegas de turma que já fazem projetos e postam no LinkedIn enquanto ele ainda está lutando com o básico. Consome muito conteúdo no YouTube sobre programação e tecnologia. Vê notícias sobre demissões em big techs e fica preocupado. Ao mesmo tempo observa oportunidades em startups brasileiras que estão contratando desenvolvedores juniores. Vê o mercado de TI crescendo, mas sem saber exatamente por onde entrar.',
+    'em_ouve': 'Ouve da família que TI é área de futuro e que vai ganhar bem. Ouve dos professores que precisa dedicar mais tempo fora da sala de aula. Ouve dos colegas mais velhos que o mercado está difícil e as empresas querem experiência mesmo para vagas de júnior. Ouve de influenciadores no YouTube que é possível conseguir emprego em 6 meses estudando do zero. Essas mensagens contraditórias o deixam confuso sobre qual caminho seguir.',
+    'em_fala': 'Diz para os amigos que vai conseguir um estágio esse ano. Passa horas assistindo cursos no YouTube e na Udemy após as aulas da faculdade. Começa pequenos projetos mas costuma abandonar na metade quando trava em algum erro. Participa do grupo da turma no WhatsApp e às vezes ajuda colegas com dúvidas de lógica, o que o faz sentir mais confiante. Publica raramente nas redes sociais sobre tecnologia, mas acompanha ativamente o LinkedIn.',
+    'em_dores': 'Frustração com o ritmo do curso que parece desconectado do mercado real. Dificuldade em conciliar trabalho de meio período com as responsabilidades da faculdade. Medo de não ser bom o suficiente para as vagas que vê anunciadas. Falta de feedback claro dos professores sobre seu progresso real. Sensação de que cada erro de programação é um sinal de que escolheu a área errada. Falta de dinheiro para investir em cursos pagos e certificações.',
+    'em_ganhos': 'Quer conseguir um estágio ainda no 3º ou 4º semestre do curso. Quer montar um portfólio com pelo menos 3 projetos no GitHub para mostrar nas entrevistas. Deseja ser reconhecido como alguém competente e confiável na área. Sonha em ter estabilidade financeira e poder ajudar a família. Quer aprender inglês técnico para acessar oportunidades melhores. Quer terminar o curso sentindo que aprendeu algo de verdade e está pronto para o mercado.'
+  };
+
   function sv(k,v){localStorage.setItem('em_'+k,v);showToast('💾 Salvo automaticamente!')}
   function loadAll(){
     ['em_usuario','em_pensa','em_ve','em_ouve','em_fala','em_dores','em_ganhos'].forEach(function(k){
       var el=document.getElementById(k);
-      var v=localStorage.getItem('em_'+k);
-      if(el&&v)el.value=v;
+      if(!el)return;
+      var saved=localStorage.getItem('em_'+k);
+      el.value = (saved !== null) ? saved : (EM_DEFAULTS[k] || '');
     });
   }
   
