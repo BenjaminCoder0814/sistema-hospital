@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profissional de TI — Design Thinking</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    
+  /* ── NAVBAR ── */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--nav-h:66px;--blue:#3b82f6;--purple:#8b5cf6;--green:#10b981;--red:#ef4444;--amber:#f59e0b;--rose:#f43f5e;--dblue:#1e3a8a;--text:#1e293b;--muted:#64748b}
+  body{font-family:'Poppins',sans-serif;min-height:100vh;padding-top:var(--nav-h);overflow-x:hidden;color:var(--text)}
+  .navbar{position:fixed;inset:0 0 auto 0;height:var(--nav-h);background:rgba(255,255,255,.94);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom:1px solid rgba(100,116,139,.1);display:flex;align-items:center;justify-content:space-between;padding:0 30px;z-index:1000;box-shadow:0 2px 18px rgba(0,0,0,.06)}
+  .nav-brand{font-size:1rem;font-weight:700;color:var(--blue);text-decoration:none;letter-spacing:-.3px;white-space:nowrap}
+  .nav-links{display:flex;gap:5px;list-style:none}
+  .nav-links a{text-decoration:none;color:var(--muted);font-size:.85rem;font-weight:500;padding:7px 15px;border-radius:40px;transition:all .2s;white-space:nowrap}
+  .nav-links a:hover,.nav-links a.active{background:var(--blue);color:#fff}
+  .nav-toggle{display:none;background:none;border:none;font-size:1.35rem;cursor:pointer;color:var(--blue);padding:8px;line-height:1}
+  @media(max-width:680px){
+    .nav-links{display:none;flex-direction:column;position:absolute;top:var(--nav-h);left:0;right:0;background:rgba(255,255,255,.98);padding:10px 18px 18px;gap:3px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+    .nav-links.open{display:flex}
+    .nav-toggle{display:block}
+    .navbar{padding:0 16px}
+  }
+
+    body{background:linear-gradient(135deg,#f0f4ff 0%,#e8edff 50%,#f5f0ff 100%)}
+    .page{max-width:820px;margin:0 auto;padding:48px 18px 80px;animation:fadeIn .7s ease}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+    /* BACK BUTTON */
+    .back-btn{display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:var(--muted);font-size:.85rem;font-weight:600;padding:8px 16px;border-radius:40px;background:rgba(255,255,255,.7);border:1px solid #e2e8f0;transition:all .2s;margin-bottom:28px}
+    .back-btn:hover{background:#fff;color:var(--blue);border-color:var(--blue);transform:translateX(-3px)}
+    /* PROFILE CARD */
+    .profile-card{background:rgba(255,255,255,.92);backdrop-filter:blur(18px);border-radius:24px;box-shadow:0 8px 36px rgba(59,130,246,.1);border:1px solid rgba(255,255,255,.9);overflow:hidden;margin-bottom:24px;animation:cardIn .6s ease backwards}
+    @keyframes cardIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .profile-header{background:linear-gradient(135deg,#1e3a8a 0%,#3b82f6 60%,#6366f1 100%);padding:32px 32px 28px;display:flex;align-items:flex-start;gap:22px;flex-wrap:wrap}
+    .profile-avatar{width:80px;height:80px;border-radius:22px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:2.4rem;border:3px solid rgba(255,255,255,.3);flex-shrink:0;margin-top:4px}
+    .profile-info{flex:1;min-width:220px}
+    .profile-info .hd-label{color:rgba(255,255,255,.6);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px}
+    .profile-info .hd-input{width:100%;background:rgba(255,255,255,.13);border:2px solid rgba(255,255,255,.25);border-radius:10px;padding:10px 14px;font-family:'Poppins',sans-serif;font-weight:700;color:#fff;outline:none;transition:all .2s;margin-bottom:10px}
+    .profile-info .hd-input::placeholder{color:rgba(255,255,255,.4);font-weight:400}
+    .profile-info .hd-input:focus{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.55);box-shadow:0 0 0 3px rgba(255,255,255,.12)}
+    .profile-info .hd-input.name{font-size:1.25rem}
+    .profile-info .hd-input.role{font-size:.9rem;font-weight:500}
+    .hd-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media(max-width:560px){.hd-row{grid-template-columns:1fr}}
+    .profile-body{padding:28px 30px}
+    /* SECTION */
+    .sec{margin-bottom:28px}
+    .sec-title{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+    .sec-icon{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+    .sec-title h2{font-size:1rem;font-weight:700;color:var(--text)}
+    .sec-title p{font-size:.8rem;color:var(--muted);margin:0}
+    .answer-ta{width:100%;min-height:120px;padding:13px 15px;border:1.5px solid #e2e8f0;border-radius:13px;font-family:'Poppins',sans-serif;font-size:.9rem;color:var(--text);background:#f8faff;resize:vertical;outline:none;transition:border-color .2s,box-shadow .2s;line-height:1.7}
+    .answer-ta:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(59,130,246,.12)}
+    .answer-ta.tall{min-height:160px}
+    /* SUMMARY */
+    .summary-card{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:2px solid #10b981;border-radius:22px;padding:28px 28px 24px;margin-bottom:24px;animation:cardIn .6s .12s ease backwards}
+    .summary-card h2{font-size:1.15rem;font-weight:800;color:#065f46;margin-bottom:14px;display:flex;align-items:center;gap:9px}
+    .summary-ta{width:100%;min-height:150px;padding:14px 16px;border:2px solid rgba(16,185,129,.35);border-radius:13px;font-family:'Poppins',sans-serif;font-size:.92rem;color:#065f46;background:rgba(255,255,255,.65);resize:vertical;outline:none;transition:border-color .2s,box-shadow .2s;line-height:1.8}
+    .summary-ta:focus{border-color:#10b981;box-shadow:0 0 0 3px rgba(16,185,129,.15)}
+    /* QUOTE */
+    .quote-card{background:linear-gradient(135deg,#eff6ff,#dbeafe);border-left:4px solid var(--blue);border-radius:0 16px 16px 0;padding:20px 22px;margin-bottom:24px;animation:cardIn .6s .2s ease backwards}
+    .quote-label{font-size:.7rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+    .quote-ta{width:100%;min-height:72px;padding:11px 14px;border:1.5px solid #bfdbfe;border-radius:10px;font-family:'Poppins',sans-serif;font-size:1rem;font-style:italic;color:#1d4ed8;font-weight:500;background:rgba(255,255,255,.6);resize:vertical;outline:none;transition:border-color .2s,box-shadow .2s;line-height:1.65;margin-bottom:10px}
+    .quote-ta:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(59,130,246,.12)}
+    .quote-author-input{width:100%;padding:8px 13px;border:1.5px solid #bfdbfe;border-radius:9px;font-family:'Poppins',sans-serif;font-size:.82rem;color:var(--muted);font-weight:600;background:rgba(255,255,255,.6);outline:none;transition:border-color .2s}
+    .quote-author-input:focus{border-color:var(--blue)}
+    
+  .toast{position:fixed;bottom:20px;right:20px;background:#1e293b;color:#fff;padding:11px 22px;border-radius:40px;font-family:'Poppins',sans-serif;font-size:.85rem;font-weight:500;box-shadow:0 6px 24px rgba(0,0,0,.18);opacity:0;transform:translateY(10px);transition:all .28s;z-index:9999;pointer-events:none}
+  .toast.show{opacity:1;transform:translateY(0)}
+
+  </style>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="Menu principal">
+  <a href="index.html" class="nav-brand">🎓 Design Thinking TI</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">&#9776;</button>
+  <ul class="nav-links" id="navLinks" role="list">
+    <li><a href="index.html">📋 Questionário</a></li>
+    <li><a href="mapa.html">🗺️ Mapa de Empatia</a></li>
+    <li><a href="profissional.html"  class="active" aria-current="page">👨‍💻 Profissional TI</a></li>
+  </ul>
+</nav>
+<main class="page" role="main">
+
+  <a href="index.html" class="back-btn" aria-label="Voltar ao questionário">&#8592; Voltar ao Questionário</a>
+
+  <!-- PROFILE CARD -->
+  <article class="profile-card" aria-label="Perfil do profissional de TI">
+    <div class="profile-header">
+      <div class="profile-avatar" aria-hidden="true">👨‍💻</div>
+      <div class="profile-info">
+        <div class="hd-label">Nome do Profissional</div>
+        <input class="hd-input name" type="text" id="p_nome" placeholder="Ex: João Silva" autocomplete="off" oninput="sv('p_nome',this.value)" aria-label="Nome do profissional">
+        <div class="hd-label">Cargo · Empresa</div>
+        <input class="hd-input role" type="text" id="p_cargo" placeholder="Ex: Desenvolvedor Sênior · Empresa XYZ" autocomplete="off" oninput="sv('p_cargo',this.value)" aria-label="Cargo e empresa">
+        <div class="hd-row">
+          <div>
+            <div class="hd-label">Tempo de Experiência</div>
+            <input class="hd-input" type="text" id="p_exp" placeholder="Ex: 10 anos" autocomplete="off" oninput="sv('p_exp',this.value)" aria-label="Tempo de experiência">
+          </div>
+          <div>
+            <div class="hd-label">Formação</div>
+            <input class="hd-input" type="text" id="p_form" placeholder="Ex: Bacharel em Ciência da Computação" autocomplete="off" oninput="sv('p_form',this.value)" aria-label="Formação">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-body">
+
+      <!-- APRESENTAÇÃO -->
+      <div class="sec">
+        <div class="sec-title">
+          <div class="sec-icon" style="background:#dbeafe;color:#3b82f6" aria-hidden="true">👤</div>
+          <div><h2>Apresentação</h2><p>Quem é esse profissional?</p></div>
+        </div>
+        <textarea class="answer-ta" id="p_apresentacao" placeholder="Descreva brevemente o profissional entrevistado: idade, área de atuação, trajetória inicial, empresa atual…" oninput="sv('p_apresentacao',this.value)" aria-label="Apresentação do profissional"></textarea>
+      </div>
+
+      <!-- DESAFIOS -->
+      <div class="sec">
+        <div class="sec-title">
+          <div class="sec-icon" style="background:#fee2e2;color:#ef4444" aria-hidden="true">⚡</div>
+          <div><h2>Principais Desafios da Carreira</h2><p>O que é difícil na área de TI?</p></div>
+        </div>
+        <textarea class="answer-ta" id="p_desafios" placeholder="Liste os principais desafios que o profissional mencionou durante a entrevista…" oninput="sv('p_desafios',this.value)" aria-label="Desafios da carreira"></textarea>
+      </div>
+
+      <!-- MOTIVAÇÕES -->
+      <div class="sec">
+        <div class="sec-title">
+          <div class="sec-icon" style="background:#d1fae5;color:#10b981" aria-hidden="true">💡</div>
+          <div><h2>Motivações</h2><p>O que faz valer a pena?</p></div>
+        </div>
+        <textarea class="answer-ta" id="p_motivacoes" placeholder="O que motiva esse profissional? O que ele/ela destacou como fonte de satisfação no trabalho?…" oninput="sv('p_motivacoes',this.value)" aria-label="Motivações"></textarea>
+      </div>
+
+      <!-- DICAS -->
+      <div class="sec">
+        <div class="sec-title">
+          <div class="sec-icon" style="background:#ede9fe;color:#8b5cf6" aria-hidden="true">🎯</div>
+          <div><h2>Dicas para Estudantes de TI</h2><p>Conselhos práticos para quem está começando</p></div>
+        </div>
+        <textarea class="answer-ta tall" id="p_dicas" placeholder="Quais dicas ou conselhos o profissional deu para quem está começando na área de TI?…" oninput="sv('p_dicas',this.value)" aria-label="Dicas para estudantes"></textarea>
+      </div>
+
+      <!-- TRAJETÓRIA -->
+      <div class="sec">
+        <div class="sec-title">
+          <div class="sec-icon" style="background:#fef3c7;color:#f59e0b" aria-hidden="true">🛤️</div>
+          <div><h2>Trajetória Profissional</h2><p>Como chegou onde está?</p></div>
+        </div>
+        <textarea class="answer-ta" id="p_trajetoria" placeholder="Descreva a trajetória profissional: primeiros empregos, mudanças de área, evoluções de cargo, momentos marcantes…" oninput="sv('p_trajetoria',this.value)" aria-label="Trajetória profissional"></textarea>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- QUOTE -->
+  <div class="quote-card" role="complementary" aria-label="Citação do profissional">
+    <div class="quote-label">💬 Frase marcante da entrevista</div>
+    <textarea class="quote-ta" id="p_frase" placeholder='"Escreva aqui uma frase ou citação marcante que o profissional disse durante a entrevista…"' oninput="sv('p_frase',this.value)" aria-label="Frase marcante"></textarea>
+    <input class="quote-author-input" type="text" id="p_frase_autor" placeholder="— Nome do profissional, Cargo" autocomplete="off" oninput="sv('p_frase_autor',this.value)" aria-label="Autor da citação">
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary-card" role="complementary" aria-label="Resumo da entrevista">
+    <h2>📄 Meu Resumo / Conclusão</h2>
+    <textarea class="summary-ta" id="p_resumo" placeholder="Escreva aqui o seu resumo e conclusão da entrevista: o que você aprendeu, quais foram os pontos mais relevantes, como isso se relaciona com a sua vida como estudante de TI, insights do Design Thinking…" oninput="sv('p_resumo',this.value)" aria-label="Resumo e conclusão"></textarea>
+  </div>
+
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+  // Navbar toggle
+  document.getElementById('navToggle').addEventListener('click',function(){
+    var nl=document.getElementById('navLinks');
+    var o=nl.classList.toggle('open');
+    this.setAttribute('aria-expanded',o);
+  });
+
+  // Toast
+  var _toastT;
+  function showToast(msg){
+    var el=document.getElementById('toast');
+    el.textContent=msg;el.classList.add('show');
+    clearTimeout(_toastT);
+    _toastT=setTimeout(function(){el.classList.remove('show')},2200);
+  }
+
+  // Auto-save
+  var FIELDS=['p_nome','p_cargo','p_exp','p_form','p_apresentacao','p_desafios','p_motivacoes','p_dicas','p_trajetoria','p_frase','p_frase_autor','p_resumo'];
+  function sv(k,v){localStorage.setItem('prof_'+k,v);showToast('💾 Salvo automaticamente!')}
+  function loadAll(){
+    FIELDS.forEach(function(k){
+      var el=document.getElementById(k);
+      var v=localStorage.getItem('prof_'+k);
+      if(el&&v)el.value=v;
+    });
+  }
+  loadAll();
+</script>
+</body>
+</html>

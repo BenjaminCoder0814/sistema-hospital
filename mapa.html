@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa de Empatia — Design Thinking TI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    
+  /* ── NAVBAR ── */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--nav-h:66px;--blue:#3b82f6;--purple:#8b5cf6;--green:#10b981;--red:#ef4444;--amber:#f59e0b;--rose:#f43f5e;--dblue:#1e3a8a;--text:#1e293b;--muted:#64748b}
+  body{font-family:'Poppins',sans-serif;min-height:100vh;padding-top:var(--nav-h);overflow-x:hidden;color:var(--text)}
+  .navbar{position:fixed;inset:0 0 auto 0;height:var(--nav-h);background:rgba(255,255,255,.94);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom:1px solid rgba(100,116,139,.1);display:flex;align-items:center;justify-content:space-between;padding:0 30px;z-index:1000;box-shadow:0 2px 18px rgba(0,0,0,.06)}
+  .nav-brand{font-size:1rem;font-weight:700;color:var(--blue);text-decoration:none;letter-spacing:-.3px;white-space:nowrap}
+  .nav-links{display:flex;gap:5px;list-style:none}
+  .nav-links a{text-decoration:none;color:var(--muted);font-size:.85rem;font-weight:500;padding:7px 15px;border-radius:40px;transition:all .2s;white-space:nowrap}
+  .nav-links a:hover,.nav-links a.active{background:var(--blue);color:#fff}
+  .nav-toggle{display:none;background:none;border:none;font-size:1.35rem;cursor:pointer;color:var(--blue);padding:8px;line-height:1}
+  @media(max-width:680px){
+    .nav-links{display:none;flex-direction:column;position:absolute;top:var(--nav-h);left:0;right:0;background:rgba(255,255,255,.98);padding:10px 18px 18px;gap:3px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+    .nav-links.open{display:flex}
+    .nav-toggle{display:block}
+    .navbar{padding:0 16px}
+  }
+
+    body{background:linear-gradient(135deg,#f0f4ff 0%,#e8edff 50%,#f5f0ff 100%)}
+    /* ── PAGE ── */
+    .page{max-width:1100px;margin:0 auto;padding:44px 18px 72px;animation:fadeIn .7s ease}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+    /* ── INSTRUCTION BANNER ── */
+    .banner{background:rgba(255,255,255,.88);backdrop-filter:blur(16px);border-radius:18px;padding:22px 28px;margin-bottom:30px;border:1px solid rgba(59,130,246,.12);box-shadow:0 4px 20px rgba(59,130,246,.08);display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap}
+    .banner-ico{font-size:2rem;flex-shrink:0}
+    .banner h1{font-size:1.25rem;font-weight:800;color:#1d4ed8;margin-bottom:5px}
+    .banner p{font-size:.9rem;color:var(--muted);line-height:1.65;margin:0}
+    /* ── USER NAME BOX ── */
+    .user-box{background:linear-gradient(135deg,#1e3a8a,#1e40af);border-radius:22px;padding:26px 22px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(30,58,138,.35);border:3px solid #1d4ed8;text-align:center;min-height:160px;margin-bottom:22px}
+    .user-box label{color:rgba(255,255,255,.75);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px;display:block}
+    .user-box input{width:100%;background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.3);border-radius:12px;padding:12px 16px;font-family:'Poppins',sans-serif;font-size:1.05rem;font-weight:600;color:#fff;text-align:center;outline:none;transition:all .2s}
+    .user-box input::placeholder{color:rgba(255,255,255,.45)}
+    .user-box input:focus{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.6);box-shadow:0 0 0 3px rgba(255,255,255,.15)}
+    .user-box .user-avatar{font-size:2.5rem;margin-bottom:10px}
+    /* ── EMPATHY GRID ── */
+    .em-grid{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:auto auto auto;gap:18px;grid-template-areas:"pensa user ve" "ouve user fala" "dores . ganhos"}
+    .em-user{grid-area:user}
+    .em-pensa{grid-area:pensa}.em-ve{grid-area:ve}
+    .em-ouve{grid-area:ouve}.em-fala{grid-area:fala}
+    .em-dores{grid-area:dores}.em-ganhos{grid-area:ganhos}
+    @media(max-width:860px){
+      .em-grid{grid-template-columns:1fr;grid-template-areas:"user" "pensa" "ve" "ouve" "fala" "dores" "ganhos"}
+    }
+    /* ── SECTION BOX ── */
+    .em-box{background:rgba(255,255,255,.88);backdrop-filter:blur(14px);border-radius:20px;padding:20px 20px 18px;border:2.5px solid var(--c);box-shadow:0 5px 24px rgba(0,0,0,.07);transition:transform .22s,box-shadow .22s;animation:boxIn .6s ease backwards;display:flex;flex-direction:column;gap:10px}
+    .em-box:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.1)}
+    .em-box:nth-child(1){animation-delay:.05s}.em-box:nth-child(2){animation-delay:.10s}.em-box:nth-child(3){animation-delay:.15s}.em-box:nth-child(4){animation-delay:.20s}.em-box:nth-child(5){animation-delay:.25s}.em-box:nth-child(6){animation-delay:.30s}
+    @keyframes boxIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    .em-head{display:flex;align-items:flex-start;gap:11px}
+    .em-icon{width:42px;height:42px;border-radius:12px;background:var(--c);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;color:#fff}
+    .em-title{font-size:.95rem;font-weight:700;color:var(--c);line-height:1.2;margin-bottom:3px}
+    .em-sub{font-size:.76rem;color:var(--muted);line-height:1.4}
+    .em-ta{width:100%;min-height:110px;padding:11px 13px;border:1.5px solid #e2e8f0;border-radius:11px;font-family:'Poppins',sans-serif;font-size:.87rem;color:var(--text);background:#fafafa;resize:vertical;outline:none;transition:border-color .2s,box-shadow .2s;flex:1}
+    .em-ta:focus{border-color:var(--c);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 15%,transparent)}
+    
+  .toast{position:fixed;bottom:20px;right:20px;background:#1e293b;color:#fff;padding:11px 22px;border-radius:40px;font-family:'Poppins',sans-serif;font-size:.85rem;font-weight:500;box-shadow:0 6px 24px rgba(0,0,0,.18);opacity:0;transform:translateY(10px);transition:all .28s;z-index:9999;pointer-events:none}
+  .toast.show{opacity:1;transform:translateY(0)}
+
+  </style>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="Menu principal">
+  <a href="index.html" class="nav-brand">🎓 Design Thinking TI</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">&#9776;</button>
+  <ul class="nav-links" id="navLinks" role="list">
+    <li><a href="index.html">📋 Questionário</a></li>
+    <li><a href="mapa.html"  class="active" aria-current="page">🗺️ Mapa de Empatia</a></li>
+    <li><a href="profissional.html">👨‍💻 Profissional TI</a></li>
+  </ul>
+</nav>
+<main class="page" role="main">
+  <div class="banner" role="banner">
+    <span class="banner-ico">🗺️</span>
+    <div>
+      <h1>Momento 4 — Mapa de Empatia &nbsp;·&nbsp; 15 Minutos</h1>
+      <p>Após a entrevista, preencha o mapa com informações sobre o seu entrevistado. Coloque-se no lugar dele e registre o que ele <strong>pensa, sente, vê, ouve, fala e faz</strong>, além de suas <strong>dores</strong> e <strong>ganhos</strong>.</p>
+    </div>
+  </div>
+
+  <div class="em-grid">
+    <!-- USER CENTER -->
+    <div class="em-user">
+      <div class="user-box">
+        <div class="user-avatar" aria-hidden="true">👤</div>
+        <label for="em_usuario">Nome do Usuário / Persona</label>
+        <input type="text" id="em_usuario" placeholder="Digite o nome do entrevistado…" oninput="sv('em_usuario',this.value)" aria-label="Nome do usuário" autocomplete="off">
+      </div>
+    </div>
+
+    <!-- PENSA E SENTE -->
+    
+    <section class="em-box em-pensa" style="--c:#3b82f6;--cl:#dbeafe" aria-label="O que PENSA e SENTE?">
+      <div class="em-head">
+        <span class="em-icon" aria-hidden="true">💭</span>
+        <div>
+          <h2 class="em-title">O que PENSA e SENTE?</h2>
+          <p class="em-sub">Medos, sonhos, preocupações íntimas</p>
+        </div>
+      </div>
+      <textarea class="em-ta" id="em_pensa" placeholder="Quais são seus maiores medos, sonhos e preocupações? O que realmente importa para ele/ela?" oninput="sv('em_pensa',this.value)" aria-label="O que PENSA e SENTE?"></textarea>
+    </section>
+
+    <!-- VÊ -->
+    
+    <section class="em-box em-ve" style="--c:#8b5cf6;--cl:#ede9fe" aria-label="O que VÊ?">
+      <div class="em-head">
+        <span class="em-icon" aria-hidden="true">👁️</span>
+        <div>
+          <h2 class="em-title">O que VÊ?</h2>
+          <p class="em-sub">O ambiente ao redor, o mercado, amigos</p>
+        </div>
+      </div>
+      <textarea class="em-ta" id="em_ve" placeholder="O que ele/ela vê no seu ambiente? Que tipo de conteúdo consome? Como vê o mercado de TI?" oninput="sv('em_ve',this.value)" aria-label="O que VÊ?"></textarea>
+    </section>
+
+    <!-- OUVE -->
+    
+    <section class="em-box em-ouve" style="--c:#10b981;--cl:#d1fae5" aria-label="O que OUVE?">
+      <div class="em-head">
+        <span class="em-icon" aria-hidden="true">👂</span>
+        <div>
+          <h2 class="em-title">O que OUVE?</h2>
+          <p class="em-sub">O que amigos, família e colegas dizem</p>
+        </div>
+      </div>
+      <textarea class="em-ta" id="em_ouve" placeholder="O que ouve de amigos, família, professores? Quais influências recebe? Quem escuta?" oninput="sv('em_ouve',this.value)" aria-label="O que OUVE?"></textarea>
+    </section>
+
+    <!-- FALA E FAZ -->
+    
+    <section class="em-box em-fala" style="--c:#ef4444;--cl:#ffe4e6" aria-label="O que FALA e FAZ?">
+      <div class="em-head">
+        <span class="em-icon" aria-hidden="true">💬</span>
+        <div>
+          <h2 class="em-title">O que FALA e FAZ?</h2>
+          <p class="em-sub">Atitudes e comportamentos visíveis</p>
+        </div>
+      </div>
+      <textarea class="em-ta" id="em_fala" placeholder="O que costuma dizer? Como se comporta em grupo? Quais são seus hobbies e rotinas relacionadas a TI?" oninput="sv('em_fala',this.value)" aria-label="O que FALA e FAZ?"></textarea>
+    </section>
+
+    <!-- DORES -->
+    
+    <section class="em-box em-dores" style="--c:#dc2626;--cl:#fee2e2" aria-label="DORES — Frustrações">
+      <div class="em-head">
+        <span class="em-icon" aria-hidden="true">😣</span>
+        <div>
+          <h2 class="em-title">DORES — Frustrações</h2>
+          <p class="em-sub">Medos, obstáculos, frustrações</p>
+        </div>
+      </div>
+      <textarea class="em-ta" id="em_dores" placeholder="Quais são suas maiores dificuldades? O que o/a frustra no curso ou na área de TI?" oninput="sv('em_dores',this.value)" aria-label="DORES — Frustrações"></textarea>
+    </section>
+
+    <!-- GANHOS -->
+    
+    <section class="em-box em-ganhos" style="--c:#059669;--cl:#d1fae5" aria-label="GANHOS — Desejos">
+      <div class="em-head">
+        <span class="em-icon" aria-hidden="true">🏆</span>
+        <div>
+          <h2 class="em-title">GANHOS — Desejos</h2>
+          <p class="em-sub">Desejos, necessidades, sucesso</p>
+        </div>
+      </div>
+      <textarea class="em-ta" id="em_ganhos" placeholder="O que ele/ela quer alcançar? Quais são suas metas e desejos? O que define sucesso para ele/ela?" oninput="sv('em_ganhos',this.value)" aria-label="GANHOS — Desejos"></textarea>
+    </section>
+
+  </div>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+  function sv(k,v){localStorage.setItem('em_'+k,v);showToast('💾 Salvo automaticamente!')}
+  function loadAll(){
+    ['em_usuario','em_pensa','em_ve','em_ouve','em_fala','em_dores','em_ganhos'].forEach(function(k){
+      var el=document.getElementById(k);
+      var v=localStorage.getItem('em_'+k);
+      if(el&&v)el.value=v;
+    });
+  }
+  
+  var _toastT;
+  function showToast(msg){
+    var el=document.getElementById('toast');
+    el.textContent=msg;el.classList.add('show');
+    clearTimeout(_toastT);
+    _toastT=setTimeout(function(){el.classList.remove('show')},2200);
+  }
+
+  
+  document.getElementById('navToggle').addEventListener('click',function(){
+    var nl=document.getElementById('navLinks');
+    var o=nl.classList.toggle('open');
+    this.setAttribute('aria-expanded',o);
+  });
+
+  loadAll();
+</script>
+</body>
+</html>
